@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import com.ramsey.plantorchestrator.datalayer.DataLayerException;
 import com.ramsey.plantorchestrator.datalayer.DataStore;
-import com.ramsey.plantorchestrator.datalayer.WeatherStore;
 import com.ramsey.plantorchestrator.datalayer.dataObject.Weather;
 
 import org.springframework.beans.factory.annotation.Autowired;

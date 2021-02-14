@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: plant-dep
+  name: plant-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plant-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: plant-dep
+    spec:
+      containers:
+      - image: plantorchestrator:0.0.1-SNAPSHOT
+        name: plantorchestrator
+        ports:
+        - containerPort: 8080
+        resources: {}
+        imagePullPolicy: Never
