@@ -2,8 +2,7 @@ package com.ramsey.plantorchestrator;
 
 import java.util.Collection;
 
-import com.ramsey.plantorchestrator.datalayer.DataLayerException;
-import com.ramsey.plantorchestrator.datalayer.DataStore;
+import com.ramsey.plantorchestrator.datalayer.MongoDataStore;
 import com.ramsey.plantorchestrator.datalayer.dataObject.Weather;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WeatherController {
 
     @Autowired
-    private DataStore<Weather> store;
+    private MongoDataStore store;
 
     @GetMapping("/hello")
     public String hello() {
@@ -24,20 +23,20 @@ public class WeatherController {
     }
 
     @GetMapping("/weather")
-    public Collection<Weather> weather() throws DataLayerException {
-        Collection<Weather> db = store.getAll();
+    public Collection<Weather> weather() {
+        Collection<Weather> db = store.findAll();
         return db;
     }
 
     @PostMapping("/createWeather")
-    public Weather createWeather(@RequestBody Weather weather) throws DataLayerException {
-        store.put(weather);
+    public Weather createWeather(@RequestBody Weather weather){
+        store.save(weather);
         return weather;
     }
 
     @PostMapping("/createWeathers")
-    public Collection<Weather> weather(@RequestBody Collection<Weather> weathers) throws DataLayerException {
-        store.put(weathers);
+    public Collection<Weather> createWeather(@RequestBody Collection<Weather> weathers){
+        store.saveAll(weathers);
         return weathers;
     }
 
